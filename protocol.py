@@ -16,7 +16,7 @@ class FreeCustomerData(CustomerData):
 
 
 @dataclass(frozen=True, kw_only=True, slots=True)
-class RegistereCustomerData(CustomerData):
+class RegisteredCustomerData(CustomerData):
     customer_id: int
 
 
@@ -49,7 +49,7 @@ class RegisteredCustomer(ICustomer):
     """Checking customer subtype we can implement chain responsibility pattern"""
 
     def process_customer(self, customer: C) -> None:
-        if isinstance(customer, RegistereCustomerData):
+        if isinstance(customer, RegisteredCustomerData):
             print("Handler for registered customer")
 
 
@@ -76,7 +76,7 @@ def get_free_customer():
 
 
 def get_registered_customer():
-    return RegistereCustomerData(last_visit=datetime.now(), order_id=2, customer_id=344)
+    return RegisteredCustomerData(last_visit=datetime.now(), order_id=2, customer_id=344)
 
 
 if __name__ == "__main__":
